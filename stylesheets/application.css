@@ -19,7 +19,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 14px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 }
 
 #wrapper {
@@ -298,9 +298,23 @@ a:hover {
   content: none;
 }
 
-#sidebar a.selected {
+#sidebar li > a {
+  position: relative;
+  display: block;
+  padding: 2px 2px 2px 25px!important;
+  background-position-x: 3px;
+}
+#sidebar li > a::before {
+  left: 3px!important;
+}
+#sidebar li > a:hover {
+  background-color: #eee;
+}
+#sidebar li > a.selected {
   background-color: #eee;
   color: #666;
+  padding-left: 25px !important;
+  background-position: 5px 40%;
 }
 
 #content {
@@ -369,13 +383,14 @@ a:hover {
 
 #projects-index ul.projects li.root {
   margin-bottom: 1em;
-  background: #fff url(../images/project_big.png) no-repeat top 15px left 10px;
+  background: #fff;
   padding: 20px;
   border: 0;
 }
 
 #projects-index ul.projects li.root>div {
-  padding-left: 30px;
+  padding-right: 30px;
+  width: 100%;
 }
 
 #projects-index ul.projects div.root a.project {
@@ -399,6 +414,13 @@ a:hover {
   padding: 10px;
   border-radius: 3px;
 }
+#projects-index ul.projects li.child a {
+  display: block;
+}
+#projects-index ul li a::before {
+  right: 0;
+  left: auto;
+}
 
 #projects-index ul.projects div.root a.project.child {
   display: block;
@@ -409,6 +431,7 @@ a:hover {
 #content>.contextual a.icon-add,
 #content>.contextual a.icon-edit,
 #content>.tab-content a.icon-add {
+  display: inline-block;
   background: #00cc00;
   padding: 10px 10px 10px 30px;
   border-radius: 3px;
@@ -432,6 +455,14 @@ a:hover {
   color: #fff;
   background-color: #009900;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+#content>.tab-content .icon-only.icon-add {
+  color: transparent;
+  padding-right: 5px;
+}
+#content>.tab-content .icon-only.icon-add:hover {
+  color: transparent;
 }
 
 p.buttons {
@@ -585,6 +616,13 @@ textarea.wiki-edit {
 
 select {
   height: calc(2.25rem + 2px);
+}
+select option {
+    color: #eee;
+}
+select option[selected=selected] {
+    background-color: rgba(0,150,250,0.1);
+    color: white;
 }
 
 select[multiple="multiple"] {
@@ -989,6 +1027,7 @@ td.name.icon {
 #top-menu a.projects,
 #top-menu a.administration,
 #top-menu a.help,
+#sidebar li > a:not(.icon),
 .icon-settings,
 .icon-add,
 .icon-add-bullet,
@@ -1038,6 +1077,15 @@ tr span.expander,
 .icon-package,
 .icon-move,
 .icon-history,
+.icon-not-ok,
+.icon-workflows,
+.icon-custom-fields,
+.icon-list,
+.icon-server-authentication,
+.icon-plugins,
+.icon-help,
+.icon-ok,
+.icon-error,
 .ui-state-default .ui-icon,
 #context-menu li a.submenu,
 tr.issue.parent td.subject,
@@ -1047,7 +1095,10 @@ p.cal.legend .starting,
 table.cal .ending a.issue,
 p.cal.legend .ending,
 table.cal .starting.ending a.issue,
-p.cal.legend .starting.ending  {
+p.cal.legend .starting.ending,
+button.tab-left,
+button.tab-right,
+tr.project.idnt td.name span  {
   background-image: none!important;
   position: relative;
 }
@@ -1057,6 +1108,7 @@ p.cal.legend .starting.ending  {
 #top-menu a.projects::before,
 #top-menu a.administration::before,
 #top-menu a.help::before,
+#sidebar li > a::before,
 .icon-settings::before,
 .icon-add::before,
 .icon-add-bullet::before,
@@ -1106,6 +1158,15 @@ tr span.expander::before,
 .icon-package::before,
 .icon-move::before,
 .icon-history::before,
+.icon-not-ok::before,
+.icon-workflows::before,
+.icon-custom-fields::before,
+.icon-list::before,
+.icon-server-authentication::before,
+.icon-plugins::before,
+.icon-help::before,
+.icon-ok::before,
+.icon-error::before,
 .ui-state-default .ui-icon::before,
 #context-menu li a.submenu::before,
 tr.issue.parent td.subject::before,
@@ -1115,7 +1176,10 @@ p.cal.legend .starting::before,
 table.cal .ending a.issue::before,
 p.cal.legend .ending::before,
 table.cal .starting.ending a.issue::before,
-p.cal.legend .starting.ending::before  {
+p.cal.legend .starting.ending::before,
+button.tab-left::before,
+button.tab-right::before,
+tr.project.idnt td.name span::before {
   content: "";
   position: absolute;
   top: 0;
@@ -1130,214 +1194,262 @@ p.cal.legend .starting.ending::before  {
 }
 
 #top-menu a.home::before {
-  content: "\f015";
+  content: "\f015"!important;
 }
 
 #top-menu a.my-page::before {
-  content: "\e065";
+  content: "\e065"!important;
 }
 
 #top-menu a.projects::before {
-  content: "\f01c";
+  content: "\f01c"!important;
 }
 
 #top-menu a.administration::before  {
-  content: "\f085";
+  content: "\f085"!important;
 }
 
 #top-menu a.help::before  {
-  content: "\f059";
+  content: "\f059"!important;
+}
+
+#sidebar li > a:not(.icon):before {
+  content: "\f0da"!important;
+  left: 3px;
 }
 
 .icon-settings::before  {
-  content: "\f013";
+  content: "\f013"!important;
 }
 
 .icon-add::before  {
-  content: "\f055";
+  content: "\f055"!important;
   color: green;
 }
 
 .icon-add-bullet::before  {
-  content: "\f055";
+  content: "\f055"!important;
 }
 
 span.add_attachment a::before  {
-  content: "\f055";
+  content: "\f055"!important;
 }
 
 .icon-lock::before, .icon-locked::before {
-  content: "\f023";
+  content: "\f023"!important;
 }
 
 .icon-unlock::before {
-  content: "\f3c1";
+  content: "\f3c1"!important;
 }
 
 .icon-edit::before {
-  content: "\f044";
+  content: "\f044"!important;
   color: green;
 }
 
 .icon-fav-off::before {
-  content: "\f070";
+  content: "\f070"!important;
 }
 
 .icon-fav::before {
-  content: "\f06e";
+  content: "\f06e"!important;
+  color: orange;
 }
 
 .icon-copy::before {
-  content: "\f0c5";
+  content: "\f0c5"!important;
 }
 
 .icon-close::before, .icon-close:hover::before {
-  content: "\f00d";
+  content: "\f00d"!important;
 }
-.icon-close:hover::before {
+.icon-close:hover::before,
+.icon-not-ok::before {
   color: red;
 }
 .icon-del::before {
-  content: "\f2ed";
+  content: "\f2ed"!important;
   color: red;
 }
 
 .icon-attachment::before {
-  content: "\f0c6";
+  content: "\f0c6"!important;
 }
 
 .icon-download::before {
-  content: "\f019";
+  content: "\f019"!important;
 }
 
 .icon-comment::before {
-  content: "\f075";
+  content: "\f075"!important;
 }
 .icon-comments::before {
-  content: "\f086";
+  content: "\f086"!important;
 }
 
 .icon-issue::before {
-  content: "\f14a";
+  content: "\f14a"!important;
 }
 
 .icon-issue-closed::before {
-  content: "\f14a";
+  content: "\f14a"!important;
   color: green;
 }
 
 .icon-issue-edit::before {
-  content: "\f14b";
+  content: "\f14b"!important;
   color: orange;
 }
 
 .icon-issue-note::before {
-  content: "\f4ad";
+  content: "\f4ad"!important;
   color: blue;
 }
 
 .icon-group::before, .icon-groupnonmember::before, .icon-groupanonymous::before {
-  content: "\f0c0";
+  content: "\f0c0"!important;
 }
 
 .icon-magnifier::before {
-  content: "\f002";
+  content: "\f002"!important;
 }
 
 .icon-checked::before {
-  content: "\f00c";
+  content: "\f00c"!important;
   color: green;
 }
 
 .icon-reload::before {
-  content: "\f2f1";
+  content: "\f2f1"!important;
   color: orangered;
 }
 
 .icon-save::before {
-  content: "\f0c7";
+  content: "\f0c7"!important;
   color: blue;
 }
 
 .icon-zoom-in::before {
-  content: "\f00e";
+  content: "\f00e"!important;
 }
 
 .icon-zoom-out::before {
-  content: "\f010";
+  content: "\f010"!important;
 }
 
 .icon-project::before {
-  content: "\f01c";
+  content: "\f01c"!important;
 }
 
 .icon-projects::before {
-  content: "\f468";
+  content: "\f468"!important;
 }
 
 .icon-user::before {
-  content: "\f007";
+  content: "\f007"!important;
 }
 
 .icon-email-add::before {
-  content: "\f0e0";
+  content: "\f0e0"!important;
 }
 
 .icon-summary::before {
-  content: "\f0ae";
+  content: "\f0ae"!important;
 }
 
 .icon-roles::before {
-  content: "\f505";
+  content: "\f505"!important;
 }
 
 .icon-passwd::before {
-  content: "\f084";
+  content: "\f084"!important;
 }
 
 .toggle-multiselect::before {
-  content: "\f560";
+  content: "\f0fe"!important;
+  color: green;
 }
 
 .icon-time-entry::before, .icon-time::before {
-  content: "\f2f2";
+  content: "\f2f2"!important;
 }
 
 .icon-time-add::before {
-  content: "\f2f2";
+  content: "\f2f2"!important;
   color: green;
 }
 
 .icon-link-break::before {
-  content: "\f127";
+  content: "\f127"!important;
 }
 
 tr.open span.expander::before {
-  content: "\f056";
+  content: "\f056"!important;
 }
 
 tr span.expander::before {
-  content: "\f055";
+  content: "\f055"!important;
 }
 
 .sort-handle::before {
-  content: "\f0b2";
+  content: "\f0b2"!important;
 }
 
 .icon-vcard::before {
-  content: "\f2bb";
+  content: "\f2bb"!important;
 }
 
 .icon-package::before {
-  content: "\f466";
+  content: "\f466"!important;
 }
 
 .icon-move::before{
-  content: "\f362";
+  content: "\f362"!important;
 }
 
 .icon-history::before {
-  content: "\f1da";
+  content: "\f1da"!important;
+}
+
+button.tab-left::before {
+  content: "\f053"!important;
+}
+button.tab-right::before {
+  content: "\f054"!important;
+}
+
+.icon-workflows::before {
+  content: "\f542"!important;
+}
+
+.icon-custom-fields::before {
+  content: "\f246"!important;
+}
+
+.icon-list::before{
+  content: "\f03a"!important;
+}
+
+.icon-server-authentication::before {
+  content: "\f233"!important;
+}
+
+.icon-plugins::before {
+  content: "\f12e"!important;
+}
+
+.icon-help::before {
+  content: "\f059"!important;
+}
+
+.icon-ok::before {
+  content: "\f00c"!important;
+  color: green;
+}
+.icon-error::before {
+  content: "\f071"!important;
+  color: red;
 }
 
 .icon-start {
@@ -1358,31 +1470,35 @@ tr span.expander::before {
 
 #context-menu li a.submenu::before {
   padding-right: 16px;
-  content: "\f0da";
+  content: "\f0da"!important;
 }
 
 tr.issue.parent td.subject::before {
-  content: "\f01c";
+  content: "\f01c"!important;
 }
 
 tr.issue.idnt td.subject::before {
-  content: "\f30b";
+  content: "\f30b"!important;
 }
 
 table.cal .starting a.issue::before,
 p.cal.legend .starting::before {
-  content: "\f35a";
+  content: "\f35a"!important;
   color: green;
 }
 table.cal .ending a.issue::before,
 p.cal.legend .ending::before {
-  content: "\f359";
+  content: "\f359"!important;
   color: red;
 }
 table.cal .starting.ending a.issue::before,
 p.cal.legend .starting.ending::before {
-  content: "\f192";
+  content: "\f192"!important;
   color: red;
+}
+
+tr.project.idnt td.name span::before {
+  content: "\f0da"!important;
 }
 
 /*
@@ -1621,11 +1737,14 @@ button.tab-left, button.tab-right {
   border-bottom: 1px solid #ccc;
   bottom: 0;
 }
+button.tab-left {
+  right: -5px;
+}
 
 @media screen and (max-width: 899px) {
   #header {
     background-color: #191c20 !important;
-    background: #191c20 url(../images/bs_system_ico.png) no-repeat top 10px right 70px;
+    background: #191c20 url(../images/icon.png) no-repeat top 10px right 70px;
   }
 
   #project-jump.expanded .drdn-trigger {
