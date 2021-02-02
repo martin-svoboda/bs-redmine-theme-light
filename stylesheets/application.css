@@ -1443,7 +1443,7 @@ button.tab-right::before {
   content: "\f059"!important;
 }
 
-.icon-ok::before {
+.icon-ok::before { 
   content: "\f00c"!important;
   color: green;
 }
